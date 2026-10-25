@@ -2,7 +2,7 @@
 const {lang='en'}=Astro.props;
 const labels=lang==='zh'?['外观','自动','浅色','深色','自动模式在当地时间 19:00 至次日 7:00 使用深色']:lang==='de'?['Darstellung','Automatisch','Hell','Dunkel','Automatisch: dunkel von 19 bis 7 Uhr Ortszeit']:['Appearance','Auto','Light','Dark','Auto: dark from 7 pm to 7 am local time'];
 ---
-<label class="theme-control" title={labels[4]}><span>{labels[0]}</span><select id="theme-choice" aria-label={labels[0]}><option value="auto">{labels[1]}</option><option value="light">{labels[2]}</option><option value="dark">{labels[3]}</option></select></label>
+<details class="theme-menu header-menu"><summary aria-label={labels[0]} title={labels[0]}><span class="theme-name">{labels[0]}</span><span class="theme-icon" aria-hidden="true">◐</span></summary><div class="theme-panel"><label class="theme-control" title={labels[4]}><span>{labels[0]}</span><select id="theme-choice" aria-label={labels[0]}><option value="auto">{labels[1]}</option><option value="light">{labels[2]}</option><option value="dark">{labels[3]}</option></select></label></div></details>
 <script is:inline>
 (()=>{
 const select=document.getElementById('theme-choice');
