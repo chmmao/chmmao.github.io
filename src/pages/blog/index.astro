@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
 import {getCollection} from 'astro:content';
-const posts=(await getCollection('blog',({data})=>!data.draft)).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
+const posts=(await getCollection('blog',({data})=>!data.draft && data.lang === 'en')).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
 ---
-<Base title="Blog"><div class="page-head"><div class="eyebrow">Notes & thoughts</div><h1>Blog</h1><p>学习的记录，项目的过程，还有偶尔冒出来的想法。</p></div>{posts.length ? posts.map(post=><a class="row" href={`/blog/${post.id}/`}><div><h2>{post.data.title}</h2><p>{post.data.description}</p></div><time datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0,10)}</time></a>):<div class="empty"><h2>还没有公开的文章。</h2><p>这里留给之后的文字。先去 <a href="/projects/">Projects</a> 逛逛？</p></div>}</Base>
+<Base title="Blog"><div class="page-head"><div class="eyebrow">Notes & thoughts</div><h1>Blog</h1><p>Notes on learning, building, and the occasional unexpected idea.</p></div>{posts.length ? posts.map(post=><a class="row" href={`/blog/${post.id}/`}><div><h2>{post.data.title}</h2><p>{post.data.description}</p></div><time datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0,10)}</time></a>):<div class="empty"><h2>No posts published yet.</h2><p>A space for future notes. In the meantime, explore <a href="/projects/">Projects</a>.</p></div>}</Base>

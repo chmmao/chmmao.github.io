@@ -1,0 +1,6 @@
+---
+import CounterScript from '../../../components/CounterScript.astro';
+import Base from '../../../layouts/Base.astro';
+---
+<Base lang="de" title="Wortzähler"><div class="page-head"><a href="/de/tools/">← Alle Tools</a><h1>Wortzähler</h1><p>Wie viel hast du geschrieben und wie lange dauert das Lesen? Dein Text wird nur in deinem Browser verarbeitet, weder hochgeladen noch gespeichert.</p></div><section class="tool"><label for="text">Text eingeben oder einfügen</label><textarea id="text" placeholder="Hier losschreiben…"></textarea><div class="stats" aria-live="polite" aria-atomic="true"><div><strong id="words">0</strong><span>Wörter</span></div><div><strong id="characters">0</strong><span>Zeichen (mit Leerzeichen)</span></div><div><strong id="minutes">0</strong><span>Minuten Lesezeit · geschätzt</span></div></div><p class="footnote">Chinesische Schriftzeichen werden einzeln gezählt, andere Sprachen nach Wörtern. Die Lesezeit basiert auf etwa 300 Wörtern pro Minute.</p><button id="clear" type="button">Text leeren</button></section></Base>
+<CounterScript/>

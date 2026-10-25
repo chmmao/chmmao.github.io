@@ -1,11 +1,12 @@
 ---
-title: 第一篇文章
-description: 在这里写一两句话，介绍这篇文章。
+title: My first note
+description: A short introduction to this post.
 date: 2026-10-25
 draft: true
+lang: en
 ---
-这是一份草稿示例，不会出现在公开网站上。写好后将 `draft` 改为 `false`。
+This is an unpublished example. Set `draft` to `false` when it is ready.
 
-## 从一个想法开始
+## Start with an idea
 
-在这里写下正文。可以使用 Markdown 添加标题、链接、图片和代码。
+Write your post here using Markdown.
