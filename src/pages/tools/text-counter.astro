@@ -1,0 +1,9 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="文字计数"><div class="page-head"><a href="/tools/">← 所有工具</a><h1>文字计数</h1><p>写了多少，读起来要多久？文本只在当前浏览器中处理，不会上传或保存。</p></div><section class="tool"><label for="text">输入或粘贴文字</label><textarea id="text" placeholder="从这里开始写……"></textarea><div class="stats" aria-live="polite" aria-atomic="true"><div><strong id="words">0</strong><span>字 / 词</span></div><div><strong id="characters">0</strong><span>字符（含空格）</span></div><div><strong id="minutes">0</strong><span>分钟阅读 · 估算</span></div></div><p class="footnote">汉字逐字计数，其他语言按词分段；阅读时间按每分钟约 300 字 / 词估算。</p><button id="clear" type="button">清空文字</button></section></Base>
+<script>
+const input=document.querySelector<HTMLTextAreaElement>('#text')!;
+function update(){const text=input.value;const han=text.match(/\p{Script=Han}/gu)?.length??0;const rest=text.replace(/\p{Script=Han}/gu,' ');const segmenter=new Intl.Segmenter(undefined,{granularity:'word'});const words=han+[...segmenter.segment(rest)].filter(s=>s.isWordLike).length;document.querySelector('#words')!.textContent=String(words);document.querySelector('#characters')!.textContent=String([...text].length);document.querySelector('#minutes')!.textContent=String(Math.ceil(words/300));}
+input.addEventListener('input',update);document.querySelector('#clear')!.addEventListener('click',()=>{input.value='';update();input.focus();});
+</script>

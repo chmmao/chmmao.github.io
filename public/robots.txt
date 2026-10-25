@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://chmmao.github.io/sitemap.xml
