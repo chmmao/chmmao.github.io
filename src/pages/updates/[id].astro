@@ -5,4 +5,4 @@ export function getStaticPaths(){return updates.filter(e=>!e.draft).map(entry=>(
 const {entry}=Astro.props;
 const lang='en';const t=ui[lang];
 ---
-<Base lang={lang} title={entry.title[lang]}><div class="page-head"><a href={localized(lang,'/')}>← {t.latest}</a><h1>{entry.title[lang]}</h1><time datetime={entry.date}>{entry.date}</time></div><article class="prose"><p>{entry.body[lang]}</p>{entry.url&&<p><a href={entry.url}>{t.detail}</a></p>}</article></Base>
+<Base lang={lang} title={entry.type==='thought'?t.thoughts:(entry.title?.[lang]??t.latest)}><div class="page-head"><a href={localized(lang,'/')}>← {t.latest}</a>{entry.type!=='thought'&&entry.title&&<h1>{entry.title[lang]}</h1>}{entry.type==='thought'&&<span class="entry-meta">{t.thoughts} · </span>}<time datetime={entry.date}>{entry.date}</time></div><article class="prose"><p>{entry.body[lang]}</p>{entry.url&&<p><a href={entry.url}>{t.detail}</a></p>}</article></Base>
