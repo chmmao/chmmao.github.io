@@ -1,2 +1,2 @@
 import { defineConfig } from 'astro/config';
-export default defineConfig({ site: 'https://chmmao.github.io', trailingSlash: 'always' });
+export default defineConfig({ site: 'https://chmmao.github.io', trailingSlash: 'always', prefetch: { prefetchAll: true, defaultStrategy: 'hover' } });

@@ -1,0 +1,6 @@
+---
+import CounterScript from '../../../components/CounterScript.astro';
+import Base from '../../../layouts/Base.astro';
+---
+<Base lang="zh" title="文字计数"><div class="page-head"><a href="/zh/tools/">← 所有工具</a><h1>文字计数</h1><p>写了多少，读起来要多久？文本只在当前浏览器中处理，不会上传或保存。</p></div><section class="tool"><label for="text">输入或粘贴文字</label><textarea id="text" placeholder="从这里开始写……"></textarea><div class="stats" aria-live="polite" aria-atomic="true"><div><strong id="words">0</strong><span>字 / 词</span></div><div><strong id="characters">0</strong><span>字符（含空格）</span></div><div><strong id="minutes">0</strong><span>分钟阅读 · 估算</span></div></div><p class="footnote">汉字逐字计数，其他语言按词分段；阅读时间按每分钟约 300 字 / 词估算。</p><button id="clear" type="button">清空文字</button></section></Base>
+<CounterScript/>
