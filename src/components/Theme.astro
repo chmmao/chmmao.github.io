@@ -1,0 +1,17 @@
+---
+const {lang='en'}=Astro.props;
+const labels=lang==='zh'?['外观','自动','浅色','深色','自动模式在当地时间 19:00 至次日 7:00 使用深色']:lang==='de'?['Darstellung','Automatisch','Hell','Dunkel','Automatisch: dunkel von 19 bis 7 Uhr Ortszeit']:['Appearance','Auto','Light','Dark','Auto: dark from 7 pm to 7 am local time'];
+---
+<label class="theme-control" title={labels[4]}><span>{labels[0]}</span><select id="theme-choice" aria-label={labels[0]}><option value="auto">{labels[1]}</option><option value="light">{labels[2]}</option><option value="dark">{labels[3]}</option></select></label>
+<script is:inline>
+(()=>{
+const select=document.getElementById('theme-choice');
+let mode=document.documentElement.dataset.themeMode||'auto';
+select.value=mode;
+const apply=()=>{const h=new Date().getHours();const dark=mode==='dark'||(mode==='auto'&&(h>=19||h<7));document.documentElement.dataset.theme=dark?'dark':'light';document.documentElement.dataset.themeMode=mode;const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=dark?'#171b19':'#ffffff';};
+select.addEventListener('change',()=>{mode=select.value;try{localStorage.setItem('chmmao-theme',mode);}catch{}apply();});
+window.addEventListener('storage',e=>{if(e.key==='chmmao-theme'){mode=['auto','light','dark'].includes(e.newValue)?e.newValue:'auto';select.value=mode;apply();}});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)apply();});
+setInterval(apply,60000);apply();
+})();
+</script>
