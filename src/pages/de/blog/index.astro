@@ -1,6 +1,4 @@
 ---
-import Base from '../../../layouts/Base.astro';
-import {getCollection} from 'astro:content';
-const posts=(await getCollection('blog',({data})=>!data.draft && data.lang === 'de')).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
+import Hub from '../../../components/Hub.astro';
 ---
-<Base lang="de" title="Blog"><div class="page-head"><div class="eyebrow">Notizen & Gedanken</div><h1>Blog</h1><p>Notizen zum Lernen, zu Projekten und zu Ideen, die unterwegs auftauchen.</p></div>{posts.length ? posts.map(post=><a class="row" href={`/de/blog/${post.id}/`}><div><h2>{post.data.title}</h2><p>{post.data.description}</p></div><time datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0,10)}</time></a>):<div class="empty"><h2>Noch keine Beiträge veröffentlicht.</h2><p>Hier ist Platz für künftige Texte. Bis dahin: Schau dir die <a href="/de/projects/">Projekte</a> an.</p></div>}</Base>
+<Hub lang="de" page="work" filter="blog"/>

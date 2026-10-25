@@ -1,55 +1,62 @@
 # chmmao.github.io
 
-Chuanming Mao 的个人网站，使用 Astro 静态构建，发布至 https://chmmao.github.io/ 。
+A static Astro personal hub: https://chmmao.github.io/
 
-## 本地开发
+## Navigation
 
-使用 Node 22.23.4 或更新版本。项目也自带仅用于开发的 Node 22，以兼容旧的系统版本。
+- Latest: reverse chronological feed combining published blog posts and dated updates.
+- Work: All / Blog / Videos / Projects.
+- Thoughts: short notes, shown in full in a chronological feed.
+- Resources: browser tools and public downloads.
+- About: profile links and email.
+
+English is the default. German uses `/de/`, Chinese `/zh/`. There is no footer navigation.
+
+## Run locally
 
 ```sh
 npm ci
 ASTRO_TELEMETRY_DISABLED=1 npm run dev
-```
-
-## 发布
-
-GitHub 仓库名称必须为 `chmmao.github.io`，并设为 Public。
-在 Settings → Pages → Build and deployment → Source 选择 **GitHub Actions**。
-每次推送到 `main` 都会自动构建部署；也可以在 Actions 手动运行部署流程。
-工作流使用 GitHub 的 Pages artifact / deploy Actions，不需要个人访问令牌或自定义域名。
-
-## 写博客
-
-在 `src/content/blog/` 添加 `.md` 文件：
-
-```md
----
-title: 文章标题
-description: 一句话简介
-date: 2026-10-25
-draft: false
----
-
-这里是正文。
-```
-
-草稿使用 `draft: true`，不会生成公开页面，也不会出现在列表或站点地图中。文件名用作文章 URL。
-
-## 修改网站
-
-- 首页：`src/pages/index.astro`
-- 项目：`src/pages/projects.astro`（只列出已确认的公开仓库）
-- 工具：`src/pages/tools/`
-- 关于：`src/pages/about.astro`
-- 导航、页脚、SEO：`src/layouts/Base.astro`
-- 配色、布局、移动端样式：`src/styles/global.css`
-- 未来更换域名：修改 `astro.config.mjs` 的 `site`、`public/robots.txt`，并在 GitHub Pages 设置中绑定域名。
-
-## 构建
-
-```sh
 ASTRO_TELEMETRY_DISABLED=1 npm run build
 npm run preview
 ```
 
-输出目录为 `dist/`。不依赖服务器、付费服务、外部字体或分析服务。文字计数工具仅在浏览器内处理输入。
+Use Node 22.23.4 or newer; a compatible project-local Node is included as a development dependency.
+
+## Publish an article
+
+Add a Markdown file to `src/content/blog/`:
+
+```md
+---
+title: Article title
+description: A short summary.
+date: 2026-10-25
+lang: en
+draft: false
+---
+
+Article content.
+```
+
+Use `lang: en`, `de`, or `zh`. Published articles automatically appear in that language's blog and latest feed. Drafts are excluded from all public routes and the sitemap.
+
+## Publish a thought or update
+
+Add an entry to `updates` in `src/data/hub.ts` with a stable ID, publication date, type, localized title and body, and optional destination URL. Supported types: update, project, video, thought, resource. Thoughts appear in both Thoughts and Latest. Short thoughts are readable directly in the feed; each entry also has a permanent detail URL. Set `draft: true` to keep an entry private. Keep dates in `YYYY-MM-DD` format.
+
+The latest feed loads entries in groups of 20 as you scroll, with a Load more button as a fallback. Project and resource listings are maintained in the shared Hub component/data. Add a finished video to the Work video section when one is ready; publishing a dated update does not itself create an asset listing.
+
+## Editing
+
+- Shared navigation, languages and metadata: `src/layouts/Base.astro`
+- Page content, feed and asset sections: `src/components/Hub.astro`
+- Shared text, project links and dated updates: `src/data/hub.ts`
+- Browser tool behavior: `src/components/CounterScript.astro`
+- Appearance and immediate hover feedback: `src/styles/global.css`
+
+Older `/blog/`, `/projects/` and `/tools/` entry URLs remain available under the new navigation. There are no animation or transition delays. Hover prefetch is enabled for internal links.
+
+## Deployment
+
+The public repository is `chmmao/chmmao.github.io`. Settings → Pages → Source is **GitHub Actions**. Every push to `main` builds and deploys `dist/` using the workflow in `.github/workflows/deploy.yml`; no personal token or paid hosting is needed.

@@ -1,0 +1,8 @@
+---
+import Base from '../../layouts/Base.astro';
+import {updates,ui,localized} from '../../data/hub';
+export function getStaticPaths(){return updates.filter(e=>!e.draft).map(entry=>({params:{id:entry.id},props:{entry}}));}
+const {entry}=Astro.props;
+const lang='en';const t=ui[lang];
+---
+<Base lang={lang} title={entry.title[lang]}><div class="page-head"><a href={localized(lang,'/')}>← {t.latest}</a><h1>{entry.title[lang]}</h1><time datetime={entry.date}>{entry.date}</time></div><article class="prose"><p>{entry.body[lang]}</p>{entry.url&&<p><a href={entry.url}>{t.detail}</a></p>}</article></Base>
