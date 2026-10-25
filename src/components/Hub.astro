@@ -18,8 +18,8 @@ const feed=page==='thoughts'?entries.filter(e=>e.type==='thought'):entries;
 {(filter==='all'||filter==='videos')&&<section class="work-section"><h2>{t.videos}</h2><p class="empty-note">{t.emptyVideo}</p></section>}
 {(filter==='all'||filter==='projects')&&<section class="work-section"><h2>{t.projects}</h2>{projects.map(p=><a class="row" href={p.url}><div><span class="tag">{t.repo}</span><h3>{p.title} ↗</h3><p>{t.repoDesc}</p></div></a>)}</section>}
 </>}
-{page==='resources'&&<><a class="row" href={href('/tools/text-counter/')}><div><h2>{t.counter}</h2><p>{t.counterDesc}</p><span class="entry-detail">{t.use}</span></div></a><section class="work-section"><h2>{t.files}</h2><p class="empty-note">{t.emptyFiles}</p></section></>}
-{page==='about'&&<article class="prose"><p>{t.aboutIntro}</p><p>{t.aboutText}</p><h2>{t.elsewhere}</h2><ul class="contact-list"><li><a href="https://github.com/chmmao">GitHub ↗</a></li><li><a href="https://www.linkedin.com/in/chmmao/">LinkedIn ↗</a></li><li><a href="mailto:myosotis.mao@gmail.com">{t.email}: myosotis.mao@gmail.com</a></li></ul></article>}
+{page==='resources'&&<><section class="work-section"><h2>{t.files}</h2><p class="empty-note">{t.emptyFiles}</p></section></>}
+{page==='about'&&<article class="prose"><p>{t.aboutIntro}</p><p>{t.aboutText}</p><h2>{t.elsewhere}</h2><ul class="contact-list"><li><a href="https://github.com/chmmao">GitHub ↗</a></li><li><a href="https://www.linkedin.com/in/chmmao/">LinkedIn ↗</a></li><li><a href="mailto:astro.chmmao@gmail.com">{t.email}: astro.chmmao@gmail.com</a></li></ul></article>}
 <noscript><style>#main [data-feed-entry][hidden]{display:block!important}#main [data-load-more]{display:none!important}#main [data-feed-end][hidden]{display:block!important}</style></noscript>
 </Base>
 <script>

@@ -7,7 +7,6 @@ export const ui = {
 };
 export const projects = [
  {id:'stvg-rag',title:'StVG-rag',url:'https://github.com/chmmao/StVG-rag'},
- {id:'relationflow',title:'relationflow-ai-coding-challenge',url:'https://github.com/chmmao/relationflow-ai-coding-challenge'}
 ];
 export interface Update {id:string;date:string;type:'update'|'project'|'video'|'thought'|'resource';title:LocalText;body:LocalText;url?:string;draft?:boolean;}
 // Add a dated entry here when publishing a project, video, resource, or short thought.
