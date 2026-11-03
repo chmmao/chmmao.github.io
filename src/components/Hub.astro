@@ -7,7 +7,7 @@ const {lang,page,filter='all'}=Astro.props;
 const t=ui[lang];const href=(path:string)=>localized(lang,path);
 const posts=(await getCollection('blog',({data})=>!data.draft&&data.lang===lang)).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
 const labels={update:t.update,project:t.projects,video:t.videos,thought:t.thoughts,resource:t.resources,blog:t.blog};
-const entries=[...updates.filter(e=>!e.draft).map(e=>({id:e.id,date:e.date,type:e.type,title:e.title?.[lang],body:e.body[lang],url:href(`/updates/${e.id}/`)})),...posts.map(p=>({id:p.id,date:p.data.date.toISOString().slice(0,10),type:'blog' as const,title:p.data.title,body:p.data.description,url:href(`/blog/${p.id}/`)}))].sort((a,b)=>b.date.localeCompare(a.date)||a.id.localeCompare(b.id));
+const entries=[...updates.filter(e=>!e.draft).map(e=>({id:e.id,date:e.date,type:e.type,title:e.title?.[lang],body:e.body[lang],url:e.id==='personal-digital-life-and-long-term-memory'?href(`/blog/personal-digital-life-and-long-term-memory${lang==='zh'?'':`-${lang}`}/`):href(`/updates/${e.id}/`)})),...posts.map(p=>({id:p.id,date:p.data.date.toISOString().slice(0,10),type:'blog' as const,title:p.data.title,body:p.data.description,url:href(`/blog/${p.id}/`)}))].sort((a,b)=>b.date.localeCompare(a.date)||a.id.localeCompare(b.id));
 const feed=page==='thoughts'?entries.filter(e=>e.type==='thought'):entries;
 ---
 <Base lang={lang} title={t[page]}>
